@@ -43,7 +43,7 @@ def solve_2(data: list[tuple[str, int]]) -> int:
 
 
 if __name__ == '__main__':
-    read_data = read_input('input_1.txt')
+    read_data = read_input('../data/day2/input.txt')
     ans_1 = solve_1(read_data)
     print(f"{ans_1 = }")
     ans_2 = solve_2(read_data)

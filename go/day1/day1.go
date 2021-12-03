@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-	"path/filepath"
-	"strconv"
+    "bufio"
+    "fmt"
+    "os"
+    "path/filepath"
+    "strconv"
 )
 
 var printf = fmt.Printf

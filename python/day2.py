@@ -1,9 +1,4 @@
 def read_input(filename: str) -> list[tuple[str, int]]:
-    """
-    Reads the input and puts it into a parse-able data structure
-    :param filename: the name of the file to read
-    :return: parsed data
-    """
     input_data: list[tuple[str, int]] = []
     with open(filename, 'r') as input_file:
         for line in input_file.readlines():
@@ -46,5 +41,6 @@ if __name__ == '__main__':
     read_data = read_input('../data/day2/input.txt')
     ans_1 = solve_1(read_data)
     print(f"{ans_1 = }")
+
     ans_2 = solve_2(read_data)
     print(f"{ans_2 = }")

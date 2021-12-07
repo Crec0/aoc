@@ -1,3 +1,4 @@
+import time
 
 
 def read_input(file_name: str) -> list[int]:
@@ -18,10 +19,9 @@ def emulate_fish_growth(data: list[int], days: int) -> int:
             # offsetting by 1 so the shift can behave nicely
             counter[7] += counter[0]
             counter[9] += counter[0]
-        for age in range(TOTAL_COUNTER):
-            if age > 0:
-                counter[age - 1] = counter[age]
-                counter[age] = 0
+        for age in range(1, TOTAL_COUNTER):
+            counter[age - 1] = counter[age]
+            counter[age] = 0
 
     return sum(counter.values())
 
@@ -35,8 +35,10 @@ def solve_2(data: list[int]) -> int:
 if __name__ == '__main__':
     # input = read_input('../data/day6/input_example.txt')
     input = read_input('../data/day6/input.txt')
+    now = time.perf_counter_ns()
     ans_1 = solve_1(input)
-    print(f"{ans_1 = }")
+    print(f"{ans_1 = } {(time.perf_counter_ns() - now) // 1e3}")
 
+    now = time.perf_counter_ns()
     ans_2 = solve_2(input)
-    print(f"{ans_2 = }")
+    print(f"{ans_2 = } {(time.perf_counter_ns() - now) // 1e3}")

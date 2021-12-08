@@ -1,6 +1,5 @@
-import pprint
-from itertools import tee, zip_longest, chain
-
+from itertools import chain
+import util
 
 def read_input(filename: str) -> tuple[list, int, int]:
     with open(filename, 'r') as input_file:
@@ -24,7 +23,7 @@ def read_input(filename: str) -> tuple[list, int, int]:
 def make_grid(mini: int, maxi: int):
     return [[0] * (mini + maxi + 1) for _ in range(mini + maxi + 1)]
 
-
+@util.time_it_and_evaluate
 def solve_1(data: list, grid: list) -> int:
     for x1, y1, x2, y2 in zip(*data):
         x_min = min(x1, x2)
@@ -43,7 +42,7 @@ def solve_1(data: list, grid: list) -> int:
 def print_grid(grid):
     print('\n'.join([' '.join(map(str, ['.' if elem == 0 else elem for elem in row])) for row in grid]), end='\n\n')
 
-
+@util.time_it_and_evaluate
 def solve_2(data: list, grid: list) -> int:
     for x1, y1, x2, y2 in zip(*data):
         x_min = min(x1, x2)
@@ -72,11 +71,7 @@ if __name__ == '__main__':
     # read_data, mini, maxi = read_input('../data/day5/input_example.txt')
     read_data, mini, maxi = read_input('../data/day5/input.txt')
     empty_grid = make_grid(mini, maxi)
-
-    ans_1 = solve_1(read_data, empty_grid)
-    print(f'{ans_1 = }')
+    solve_1(read_data, empty_grid)
 
     empty_grid2 = make_grid(mini, maxi)
-
-    ans_2 = solve_2(read_data, empty_grid2)
-    print(f'{ans_2 = }')
+    solve_2(read_data, empty_grid2)

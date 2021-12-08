@@ -1,15 +1,17 @@
-def read_input(filename: str) -> list[tuple[str, int]]:
-    input_data: list[tuple[str, int]] = []
-    with open(filename, 'r') as input_file:
-        for line in input_file.readlines():
-            command, amount = line.split(' ')
-            input_data.append((command, int(amount)))
+import util
+
+
+def parse_input_data(filename):
+    input_data = []
+    for line in util.read_all_lines(filename):
+        command, amount = line.split(' ')
+        input_data.append((command, int(amount)))
     return input_data
 
 
-def solve_1(data: list[tuple[str, int]]) -> int:
+@util.time_it_and_evaluate
+def solve_1(data):
     h_pos = depth = 0
-
     for command, amount in data:
         match command:
             case 'forward':
@@ -21,9 +23,10 @@ def solve_1(data: list[tuple[str, int]]) -> int:
 
     return h_pos * depth
 
-def solve_2(data: list[tuple[str, int]]) -> int:
-    h_pos = depth = aim = 0
 
+@util.time_it_and_evaluate
+def solve_2(data):
+    h_pos = depth = aim = 0
     for command, amount in data:
         match command:
             case 'forward':
@@ -38,9 +41,6 @@ def solve_2(data: list[tuple[str, int]]) -> int:
 
 
 if __name__ == '__main__':
-    read_data = read_input('../data/day2/input.txt')
-    ans_1 = solve_1(read_data)
-    print(f"{ans_1 = }")
-
-    ans_2 = solve_2(read_data)
-    print(f"{ans_2 = }")
+    read_data = parse_input_data('../data/day2/input.txt')
+    solve_1(read_data)
+    solve_2(read_data)

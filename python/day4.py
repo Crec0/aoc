@@ -1,7 +1,4 @@
-import pprint
-from itertools import tee, pairwise
-from typing import Iterator
-
+import util
 
 def read_input(filename: str) -> tuple[list, list]:
     random_digits: list = []
@@ -22,12 +19,14 @@ def read_input(filename: str) -> tuple[list, list]:
 
     return random_digits, bingos
 
+
 def is_winner(bingo):
     iterators = []
     iterators.extend(row for row in bingo)
     iterators.extend([[row[i] for row in bingo] for i in range(5)])
     filter_visited = [[cell for cell in row if cell < 0] for row in iterators]
     return len([row for row in filter_visited if len(row) == 5]) > 0
+
 
 def mark_digit(digit, bingo):
     for i, row in enumerate(bingo):
@@ -37,12 +36,14 @@ def mark_digit(digit, bingo):
                 bingo[i][j] *= -1
                 return
 
+
 def unmarked_digits(bingo):
     for i, row in enumerate(bingo):
         for j, cell in enumerate(row):
             if cell > 0:
                 yield bingo[i][j]
 
+@util.time_it_and_evaluate
 def solve_1(digits, bingos):
     for digit in digits:
         for bingo in bingos:
@@ -52,6 +53,7 @@ def solve_1(digits, bingos):
                 d = digit
                 return sm * d
 
+@util.time_it_and_evaluate
 def solve_2(digits, bingos):
     for digit in digits:
         i = 0
@@ -62,7 +64,6 @@ def solve_2(digits, bingos):
                 if len(bingos) == 1:
                     sm = sum(unmarked_digits(bingo))
                     d = digit
-                    print(sm, d)
                     return sm * d
                 bingos.remove(bingo)
                 i -= 1
@@ -71,8 +72,5 @@ def solve_2(digits, bingos):
 
 if __name__ == '__main__':
     digits, bingos = read_input('../data/day4/input.txt')
-    ans_1 = solve_1(digits, bingos)
-    print(f"{ans_1 = }")
-    #
-    ans_2 = solve_2(digits, bingos)
-    print(f"{ans_2 = }")
+    solve_1(digits, bingos)
+    solve_2(digits, bingos)

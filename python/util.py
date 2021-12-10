@@ -6,7 +6,7 @@ def time_it_and_evaluate(method):
     def wrapper_method(*arg, **kw):
         start = time.perf_counter_ns()
         ret = method(*arg, **kw)
-        print(f'{method.__name__} => `{ret}` [{(time.perf_counter_ns() - start) / 1e6 :2.2f} ms]')
+        print(f'{method.__name__} `{ret}` [{(time.perf_counter_ns() - start) / 1e6 :2.2f} ms]')
         return ret
 
     return wrapper_method
